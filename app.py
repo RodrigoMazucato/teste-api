@@ -10,6 +10,8 @@ def pegar_bairro(cep):
     resp = requests.get(url).json()
     return resp['bairro']
 
+# Alteração
+
 @app.route("/adicionar/<cep>")
 def adicionar_bairro(cep):
     with open('bairros.txt', 'a') as b:
@@ -25,6 +27,9 @@ def adicionar_bairro(cep):
             return f'CEP inválido! {e}'
 
 @app.route("/remover/<cep>")
+
+
+
 def remover_bairro(cep):
     try:
         bairro = pegar_bairro(cep)
