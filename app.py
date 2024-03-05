@@ -12,6 +12,7 @@ def pegar_bairro(cep):
 
 # Alteração
 # Alteração
+# Alteração
 @app.route("/adicionar/<cep>")
 def adicionar_bairro(cep):
     with open('bairros.txt', 'a') as b:
