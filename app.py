@@ -10,9 +10,9 @@ def pegar_bairro(cep):
     resp = requests.get(url).json()
     return resp['bairro']
 
-# Alteração
-# Alteração
-# Alteração
+# Alteração 1
+# Alteração 2
+# Alteração 3
 @app.route("/adicionar/<cep>")
 def adicionar_bairro(cep):
     with open('bairros.txt', 'a') as b:
