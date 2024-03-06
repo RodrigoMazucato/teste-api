@@ -10,9 +10,6 @@ def pegar_bairro(cep):
     resp = requests.get(url).json()
     return resp['bairro']
 
-# Alteração 1
-# Alteração 2
-# Alteração 3
 @app.route("/adicionar/<cep>")
 def adicionar_bairro(cep):
     with open('bairros.txt', 'a') as b:
@@ -29,8 +26,6 @@ def adicionar_bairro(cep):
 
 @app.route("/remover/<cep>")
 
-
-
 def remover_bairro(cep):
     try:
         bairro = pegar_bairro(cep)
@@ -42,11 +37,9 @@ def remover_bairro(cep):
     except Exception as e:
             return f'CEP inválido! {e}'
 
-
 @app.route("/")
 def hello_world():
     return "<p>Hello, World!</p>"
-
 
 @app.route("/meu-bairro/<cep>")
 def new_route(cep):
@@ -59,7 +52,6 @@ def new_route(cep):
         return f"Bairro {bairro} não atendido"
     
     return f'Atendemos no bairro {bairro}'
-
 
 @app.route("/not-found")
 def not_found():
