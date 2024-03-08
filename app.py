@@ -1,7 +1,7 @@
 from flask import Flask
 import requests
 
-app = Flask('testes')
+app = Flask(__name__)
 
 bairros_atendidos = []
 
@@ -25,7 +25,6 @@ def adicionar_bairro(cep):
             return f'CEP inválido! {e}'
 
 @app.route("/remover/<cep>")
-
 def remover_bairro(cep):
     try:
         bairro = pegar_bairro(cep)
