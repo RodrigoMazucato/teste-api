@@ -7,7 +7,7 @@ bairros_atendidos = []
 
 def pegar_bairro(cep):
     url = f'https://viacep.com.br/ws/{cep}/json/'
-    resp = requests.get(url).json()
+    resp = requests.get(url)
     return resp['bairro']
 
 @app.route("/adicionar/<cep>")
@@ -34,7 +34,7 @@ def remover_bairro(cep):
         else:
             return f'Bairro \'{bairro}\' não foi cadastrado'
     except Exception as e:
-            return f'CEP inválido! {e}'
+        return f'CEP inválido! {e}'
 
 @app.route("/")
 def hello_world():
@@ -42,15 +42,16 @@ def hello_world():
 
 @app.route("/meu-bairro/<cep>")
 def new_route(cep):
-    print(f'O CEP digitado foi: {cep}')
-    bairro = pegar_bairro(cep)
-    if bairro is None:
-        return "Bairro não encontrado", 404
-    
-    if bairro.lower() not in bairros_atendidos:
-        return f"Bairro {bairro} não atendido"
-    
-    return f'Atendemos no bairro {bairro}'
+    try:
+        print(f'O CEP digitado foi: {cep}')
+        bairro = pegar_bairro(cep)
+        
+        if bairro not in bairros_atendidos:
+            return f"Bairro {bairro} não atendido", 404
+        
+        return f'Atendemos no bairro {bairro}'
+    except Exception as e:
+        return f'CEP inválido!'
 
 @app.route("/not-found")
 def not_found():
