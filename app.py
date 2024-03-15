@@ -7,13 +7,16 @@ bairros_atendidos = []
 
 def pegar_bairro(cep):
     url = f'https://viacep.com.br/ws/{cep}/json/'
-    resp = requests.get(url)
+    resp = requests.get(url).json()
     return resp['bairro']
 
-@app.route("/adicionar/<cep>")
+@app.route("/adicionar/<int:cep>")
 def adicionar_bairro(cep):
     with open('bairros.txt', 'a') as b:
         try:
+            cep = str(cep)
+            if len(cep) == 7:
+                cep = f'0{cep}'
             bairro = pegar_bairro(cep)
             if bairro not in bairros_atendidos:
                 bairros_atendidos.append(bairro)
@@ -40,7 +43,7 @@ def remover_bairro(cep):
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route("/meu-bairro/<cep>")
+@app.route("/meu-bairro/<int:cep>")
 def new_route(cep):
     try:
         print(f'O CEP digitado foi: {cep}')
